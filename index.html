@@ -1,13 +1,89 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>React Documentation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
 </head>
 <body>
-    
+  
+  <nav id="navbar">
+    <header>
+      <h1><i class="fab fa-react"></i> React Documentation</h1>
+    </header>
+    <ul>
+      <li><a href="#Hello_World" class="nav-link">Hello World</a></li>
+      <li><a href="#Introducing_JSX" class="nav-link">Introducing JSX</a></li>
+      <li><a href="#Rendring_Elements" class="nav-link">Rendring Elements</a></li>
+      <li><a href="#Components_and_Props" class="nav-link">Components and Props</a></li>
+      <li><a href="#State_and_Lifecycle" class="nav-link">State and Lifecycle</a></li>
+    </ul>
+  </nav>
+
+  <main id="main-doc">
+
+    <section class="main-section bot-gap" id="Hello_World" >      
+      <header>
+        <h2>Hello World</h2>
+      </header>
+      <p class="p-sub bot-gap">
+        The smallest React example looks like this:
+      </p>
+      <code class="bot-gap">ReactDOM.render(
+  &#60;h1&#62;Hello, world!&#60;&#47;h1&#62;,
+  document.getElementById('root')
+);
+      </code>
+      <p class="p-nor bot-gap">
+        It displays a heading saying “Hello, world!” on the page.
+      </p>
+      <p class="p-link bot-gap"><a href="https://reactjs.org/redirect-to-codepen/hello-world">Try it on CodePen</a></p>
+      <p class="p-nor bot-gap">
+        Click the link above to open an online editor. Feel free to make some changes, and see how they affect the output. Most pages in this guide will have editable examples like this one.
+      </p>
+    </section>
+
+    <section class="main-section bot-gap" id="Introducing_JSX" >      
+      <header>
+        <h2>Introducing JSX</h2>
+      </header>
+      <p class="p-sub bot-gap">
+        Consider this variable declaration:
+      </p>
+      <code class="bot-gap">const element = &#60;h1&#62;Hello, world!&#60;&#47;h1&#62;;        
+      </code>
+      <p class="p-nor bot-gap">This funny tag syntax is neither a string nor HTML.</p>
+      <p class="p-nor bot-gap">It is called JSX, and it is a syntax extension to JavaScript. We recommend using it with React to describe what the UI should look like. JSX may remind you of a template language, but it comes with the full power of JavaScript.</p>
+      <p class="p-nor bot-gap">JSX produces React “elements”. We will explore rendering them to the DOM in the <span class="p-link"><a href="#Rendring_Elements">next section</a></span>. Below, you can find the basics of JSX necessary to get you started.</p>
+    </section>
+
+    <section class="main-section bot-gap" id="Rendring_Elements" >      
+      <header>
+        <h2>Rendring Elements</h2>
+      </header>
+      <p class="p-sub bot-gap">
+        The smallest React example looks like this:
+      </p>
+      <code class="bot-gap">ReactDOM.render(
+  &#60;h1&#62;Hello, world!&#60;&#47;h1&#62;,
+  document.getElementById('root')
+);
+      </code>
+      <p class="p-nor bot-gap">
+        It displays a heading saying “Hello, world!” on the page.
+      </p>
+      <p class="p-link bot-gap"><a href="https://reactjs.org/redirect-to-codepen/hello-world">Try it on CodePen</a></p>
+      <p class="p-nor bot-gap">
+        Click the link above to open an online editor. Feel free to make some changes, and see how they affect the output. Most pages in this guide will have editable examples like this one.
+      </p>
+    </section>
+
+  </main>
+
+
 </body>
 </html>
