@@ -164,9 +164,23 @@ code {
   font-weight: bold;
   border-bottom: 1px solid darkkhaki;
   background-color: aliceblue;
+  color: black;
 }
 
   .p-link a:hover {
     border-bottom: 1px solid #000000de;
     background-color: aqua;
   }
+
+h3 {
+  font-size: 2.7rem;
+  margin-top: 3rem;
+}
+
+ol {
+  margin-left: 3rem;
+}
+
+.num-sty {
+  list-style-type: decimal;
+}

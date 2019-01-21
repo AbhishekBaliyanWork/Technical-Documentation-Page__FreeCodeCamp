@@ -59,6 +59,47 @@
       <p class="p-nor bot-gap">This funny tag syntax is neither a string nor HTML.</p>
       <p class="p-nor bot-gap">It is called JSX, and it is a syntax extension to JavaScript. We recommend using it with React to describe what the UI should look like. JSX may remind you of a template language, but it comes with the full power of JavaScript.</p>
       <p class="p-nor bot-gap">JSX produces React “elements”. We will explore rendering them to the DOM in the <span class="p-link"><a href="#Rendring_Elements">next section</a></span>. Below, you can find the basics of JSX necessary to get you started.</p>
+      <h3 class="bot-gap">Why JSX?</h3>
+      <ul>
+        <li class="p-nor bot-gap">React embraces the fact that rendering logic is inherently coupled with other UI logic: how events are handled, how the state changes over time, and how the data is prepared for display.</li>
+        <li class="p-nor bot-gap">Instead of artificially separating technologies by putting markup and logic in separate files, React separates concerns with loosely coupled units called “components” that contain both. We will come back to components in a further section, but if you’re not yet comfortable putting markup in JS, this talk might convince you otherwise.</li>
+        <li class="p-nor bot-gap">React doesn’t require using JSX, but most people find it helpful as a visual aid when working with UI inside the JavaScript code. It also allows React to show more useful error and warning messages.</li>
+        <li class="p-nor bot-gap">With that out of the way, let’s get started!</li>
+      </ul>
+      <h3 class="bot-gap">Embedding Expressions in JSX</h3>
+      <p class="p-nor bot-gap">In the example below, we declare a variable called name and then use it inside JSX by wrapping it in curly braces:</p>
+      <code class="bot-gap">const name = 'Josh Perez';
+const element = &#60;h1&#62;Hello, {name}&#60;&#47;h1&#62;;
+
+ReactDOM.render(
+  element,
+  document.getElementById('root')
+);
+      </code>
+      <p class="p-nor bot-gap">You can put any valid JavaScript expression inside the curly braces in JSX. For example, 2 + 2, user.firstName, or formatName(user) are all valid JavaScript expressions.</p>
+      <p class="p-nor bot-gap">In the example below, we embed the result of calling a JavaScript function, formatName(user), into an &#60;h1&#62; element.</p>
+      <code class="bot-gap">function formatName(user) {
+  return user.firstName + ' ' + user.lastName;
+}
+
+const user = {
+  firstName: 'Harper',
+  lastName: 'Perez'
+};
+
+const element = (
+  &#60;h1&#62;
+    Hello, {formatName(user)}!
+  &#60;&#47;h1&#62;
+);
+
+ReactDOM.render(
+  element,
+  document.getElementById('root')
+);        
+      </code>
+      <p class="p-link bot-gap"><a href="https://reactjs.org/redirect-to-codepen/introducing-jsx">Try it on CodePen</a></p>
+      <p class="p-nor bot-gap">We split JSX over multiple lines for readability. While it isn’t required, when doing this, we also recommend wrapping it in parentheses to avoid the pitfalls of automatic semicolon insertion.</p>
     </section>
 
     <section class="main-section bot-gap" id="Rendring_Elements" >      
@@ -66,20 +107,113 @@
         <h2>Rendring Elements</h2>
       </header>
       <p class="p-sub bot-gap">
-        The smallest React example looks like this:
+        Elements are the smallest building blocks of React apps.
       </p>
-      <code class="bot-gap">ReactDOM.render(
-  &#60;h1&#62;Hello, world!&#60;&#47;h1&#62;,
+      <p class="p-nor bot-gap">An element describes what you want to see on the screen:</p>
+      <code class="bot-gap">const element = &#60;h1&#62;Hello, world&#60;&#47;h1&#62;;
+      </code>
+      <p class="p-nor bot-gap">
+        Unlike browser DOM elements, React elements are plain objects, and are cheap to create. React DOM takes care of updating the DOM to match the React elements.
+      </p>
+      <h3 class="bot-gap">Rendering an Element into the DOM</h3>
+      <p class="p-nor bot-gap">Let’s say there is a &#60;div&#62; somewhere in your HTML file:</p>
+      <code class="bot-gap">&#60;div id&#61;"root"&#62;&#60;&#47;div&#62;
+      </code>
+      <ul>
+        <li class="p-nor bot-gap">We call this a “root” DOM node because everything inside it will be managed by React DOM.</li>
+        <li class="p-nor bot-gap">Applications built with just React usually have a single root DOM node. If you are integrating React into an existing app, you may have as many isolated root DOM nodes as you like.</li>
+        <li class="p-nor bot-gap">To render a React element into a root DOM node, pass both to ReactDOM.render():</li>
+      </ul>
+      <code class="bot-gap">const element = &#60;h1&#62;Hello, world&#60;&#47;h1&#62;;
+ReactDOM.render(element, document.getElementById('root'));
+      </code>
+      <p class="p-link bot-gap"><a href="https://reactjs.org/redirect-to-codepen/rendering-elements/render-an-element">Try it on CodePen</a></p>
+      <p class="p-nor bot-gap">
+          It displays “Hello, world” on the page.
+      </p>
+    </section>
+
+    <section class="main-section bot-gap" id="Components_and_Props" >      
+      <header>
+        <h2>Components and Props</h2>
+      </header>
+      <p class="p-sub bot-gap">
+        Components let you split the UI into independent, reusable pieces, and think about each piece in isolation. This page provides an introduction to the idea of components. You can find a <span class="p-link"><a href="https://reactjs.org/docs/react-component.html">detailed component API reference here</a></span>.
+      </p>
+      <p class="p-nor bot-gap">Conceptually, components are like JavaScript functions. They accept arbitrary inputs (called “props”) and return React elements describing what should appear on the screen.</p>
+      <h3 class="bot-gap">Function and Class Components</h3>
+      <p class="p-nor bot-gap">The simplest way to define a component is to write a JavaScript function:</p>
+      <code class="bot-gap">function Welcome(props) {
+  return &#60;h1&#62;Hello, {props.name}&#60;&#47;h1&#62;;
+}
+      </code>
+      <p class="p-nor bot-gap">
+          This function is a valid React component because it accepts a single “props” (which stands for properties) object argument with data and returns a React element. We call such components “function components” because they are literally JavaScript functions.
+      </p>
+      <p class="p-nor bot-gap">You can also use an <span class="p-link"><a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes">ES6 class</a></span> to define a component:</p>
+      <code class="bot-gap">class Welcome extends React.Component {
+  render() {
+    return &#60;h1&#62;Hello, {this.props.name}&#60;&#47;h1&#62;;
+  }
+}
+      </code>
+      <p class="p-nor bot-gap">The above two components are equivalent from React’s point of view.</p>
+      <p class="p-nor bot-gap">Classes have some additional features that we will discuss in the <span class="p-link"><a href="#State_and_Lifecycle">next sections</a></span>. Until then, we will use function components for their conciseness.</p>
+      <h3 class="bot-gap">Rendering a Component</h3>
+      <p class="p-nor bot-gap">Previously, we only encountered React elements that represent DOM tags:</p>
+      <code class="bot-gap">const element = &#60;div &#47;&#62;;
+      </code>
+      <p class="p-nor bot-gap">However, elements can also represent user-defined components:</p>
+      <code class="bot-gap">const element = &#60;Welcome name&#61;"Sara" &#47;&#62;;
+      </code>
+      <ul>
+        <li class="p-nor bot-gap">When React sees an element representing a user-defined component, it passes JSX attributes to this component as a single object. We call this object “props”.</li>
+        <li class="p-nor bot-gap">For example, this code renders “Hello, Sara” on the page:</li>
+      </ul>
+      <code class="bot-gap">function Welcome(props) {
+  return &#60;h1&#62;Hello, {props.name}&#60;&#47;h1&#62;;
+}
+
+const element = &#60;Welcome name&#61;"Sara" &#47;&#62;;
+ReactDOM.render(
+  element,
   document.getElementById('root')
 );
       </code>
-      <p class="p-nor bot-gap">
-        It displays a heading saying “Hello, world!” on the page.
+      <p class="p-link bot-gap"><a href="https://reactjs.org/redirect-to-codepen/components-and-props/rendering-a-component">Try it on CodePen</a></p>
+      <p class="p-nor bot-gap">Let’s recap what happens in this example:</p>
+      <ol>
+        <li class="num-sty">We call ReactDOM.render() with the &#60;Welcome name&#61;"Sara" &#47;&#62; element.</li>
+        <li class="num-sty">React calls the Welcome component with {name: 'Sara'} as the props.</li>
+        <li class="num-sty">Our Welcome component returns a &#60;h1&#62;Hello, Sara&#60;&#47;h1&#62; element as the result.</li>
+        <li class="num-sty">React DOM efficiently updates the DOM to match &#60;h1&#62;Hello, Sara&#60;&#47;h1&#62;.</li>
+      </ol>
+    </section>
+
+    <section class="main-section bot-gap" id="State_and_Lifecycle" >      
+      <header>
+        <h2>State and Lifecycle</h2>
+      </header>
+      <p class="p-sub bot-gap">
+          This page introduces the concept of state and lifecycle in a React component. You can find a <span class="p-link"><a href="https://reactjs.org/docs/react-component.html">detailed component API reference here</a></span>.
       </p>
-      <p class="p-link bot-gap"><a href="https://reactjs.org/redirect-to-codepen/hello-world">Try it on CodePen</a></p>
-      <p class="p-nor bot-gap">
-        Click the link above to open an online editor. Feel free to make some changes, and see how they affect the output. Most pages in this guide will have editable examples like this one.
-      </p>
+      <p class="p-nor bot-gap">We have only learned one way to update the UI. We call ReactDOM.render() to change the rendered output:</p>
+      <code class="bot-gap">function tick() {
+  const element = (
+    &#60;div&#62;
+      &#60;h1&#62;Hello, world!&#60;&#47;h1&#62;
+      &#60;h2&#62;It is {new Date().toLocaleTimeString()}.&#60;&#47;h2&#62;
+    &#60;&#47;div&#62;
+  );
+  ReactDOM.render(
+    element,
+    document.getElementById('root')
+  );
+}
+
+setInterval(tick, 1000);
+      </code>
+      <p class="p-link bot-gap"><a href="http://codepen.io/gaearon/pen/gwoJZk?editors=0010">Try it on CodePen</a></p>
     </section>
 
   </main>
