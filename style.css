@@ -184,3 +184,27 @@ ol {
 .num-sty {
   list-style-type: decimal;
 }
+
+/*---------- MEDIA QUERY ------------ */
+
+@media (max-width: 800px) {
+  body {
+    flex-direction: column;
+  }
+
+  #navbar {
+    position: relative;
+    width: 100%;
+    border-bottom: 1px solid var(--color-line-navbar, #b3b3b3);
+    border-right: none;
+  }
+
+  #navbar ul {
+    padding: 2rem;
+    text-align: center;
+  }
+
+  #main-doc {
+    margin: 2rem;
+  }
+}
